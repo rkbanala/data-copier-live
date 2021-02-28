@@ -16,7 +16,7 @@ def build_insert_query(table_name, column_names):
     print(column_values_string)
     return query
 
-def insert_data(connection, cursor, query, data, batch_size=10):
+def insert_data(connection, cursor, query, data, batch_size=100):
     recs = []
     count = 1
     for rec in data:

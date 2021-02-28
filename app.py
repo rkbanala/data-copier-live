@@ -13,7 +13,7 @@ def main():
     table_name= 'departments'
     for table_name in tables['table_name']:
         print(f'reading data for {table_name}')
-        data,column_names = read_table(db_details,table_name)
+        data,column_names = read_table(db_details,table_name,1000)
 
         print(data)
         print(f'loading data for {table_name}')
