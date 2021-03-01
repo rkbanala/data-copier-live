@@ -1,3 +1,4 @@
+import logging
 import sys
 from config import DB_DETAILS
 from util import get_tables, load_db_details
@@ -9,15 +10,19 @@ def main():
     """Program takes at least one argument"""
     env = sys.argv[1]
     a_tables = sys.argv[2]
+    logging.basicConfig(filename='data-copier.info', encoding='utf-8', level=logging.INFO)
+    logging.basicConfig(filename='data-copier.err', encoding='utf-8', level=logging.error())
     db_details = load_db_details(env)
     tables = get_tables('tables', a_tables)
     #table_name= 'departments'
     for table_name in tables['table_name']:
         #print(f'reading data for {table_name}')
+        logging.info(f'reading data for {table_name}')
         data,column_names = read_table(db_details,table_name,1000)
 
         #print(data)
         #print(f'loading data for {table_name}')
+        logging.info('loading data for {table_name}')
         load_table(db_details,data,column_names,table_name)
 
     # for rec in data:
