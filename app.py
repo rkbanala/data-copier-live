@@ -10,7 +10,7 @@ def main():
     """Program takes at least one argument"""
     env = sys.argv[1]
     a_tables = sys.argv[2]
-    logging.basicConfig(filename='data-copier.info', encoding='utf-8', level=logging.INFO)
+    logging.basicConfig(filename='data-copier.info', encoding='utf-8', format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',level=logging.INFO)
     logging.basicConfig(filename='data-copier.err', encoding='utf-8', level=logging.error())
     db_details = load_db_details(env)
     tables = get_tables('tables', a_tables)
