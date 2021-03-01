@@ -1,4 +1,4 @@
-import pandas
+import pandas as pd
 import psycopg2
 from mysql import connector as mc
 from mysql.connector import errorcode as ec
@@ -6,7 +6,7 @@ from config import DB_DETAILS
 
 
 def load_db_details(env):
-    print(env)
+    #print(env)
     return DB_DETAILS[env]
 
 def get_mysql_connection(db_host, db_name, db_user, db_pass):
@@ -54,11 +54,16 @@ def get_connection(db_type, db_host, db_name, db_user, db_pass):
                                           db_name = db_name,
                                           db_user=db_user,
                                           db_pass=db_pass)
-    else:
-        print('invalid entry')
+    # else:
+    #     print('invalid entry')
 
     return connection
 
-def get_tables(path):
-    tables =pandas.read_csv(path, sep=':')
-    return tables.query('to_be_loaded=="yes"')
+def get_tables(path, a_tables):
+    tables =pd.read_csv(path, sep=':')
+    if a_tables == 'all':
+        return a_tables.query('to_be_loaded=="yes"')
+    else:
+        tables_df = pd.DataFrame(a_tables.split(","), columns=['table_name'])
+        return tables.join(tables_df.set_index('table_name'), on = 'table_name'). \
+            query('to_be_loaded=="yes"')

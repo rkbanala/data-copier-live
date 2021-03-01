@@ -10,7 +10,7 @@ def read_table(db_details, table_name, limit=10):
                                       db_name=SOURCE_DB['DB_NAME'],
                                       db_pass=SOURCE_DB['DB_PASS'])
 
-    print(limit)
+    #print(limit)
     cursor = connection.cursor()
 
     if limit==0:

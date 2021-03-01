@@ -13,7 +13,7 @@ def build_insert_query(table_name, column_names):
     query = (f"""
         INSERT INTO {table_name} ({column_names_string}) VALUES({column_values_string})
     """)
-    print(column_values_string)
+    #print(column_values_string)
     return query
 
 def insert_data(connection, cursor, query, data, batch_size=100):
@@ -41,7 +41,7 @@ def load_table(db_details, data, column_names, table_name):
                                       db_pass=TARGET_DB['DB_PASS'])
     cursor = connection.cursor()
     query = build_insert_query(table_name,column_names)
-    print(query)
+    #print(query)
     insert_data(connection, cursor, query, data)
 
     connection.close()

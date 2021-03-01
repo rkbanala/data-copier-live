@@ -8,15 +8,16 @@ from write import build_insert_query, load_table
 def main():
     """Program takes at least one argument"""
     env = sys.argv[1]
+    a_tables = sys.argv[2]
     db_details = load_db_details(env)
-    tables = get_tables('tables')
-    table_name= 'departments'
+    tables = get_tables('tables', a_tables)
+    #table_name= 'departments'
     for table_name in tables['table_name']:
-        print(f'reading data for {table_name}')
+        #print(f'reading data for {table_name}')
         data,column_names = read_table(db_details,table_name,1000)
 
-        print(data)
-        print(f'loading data for {table_name}')
+        #print(data)
+        #print(f'loading data for {table_name}')
         load_table(db_details,data,column_names,table_name)
 
     # for rec in data:
